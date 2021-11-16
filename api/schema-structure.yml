@@ -1,0 +1,73 @@
+(i): user based models
+
+User Schema:
+    - name: String
+    - email: String
+    - address: String
+    - password: String
+    - id: String
+    - photoUrl: String
+    - role: enum(admin, student, instructor)
+    - timestamps: date
+Admin(extends User) Schema:
+    - id: String
+    - code: String
+    - user: User
+    - status: enum(active, pending,suspended, discontinued)
+Student(extends User) Schema:
+    - id: String
+    - code : String
+    - user: User
+    - status: enum(active, pending,suspended,recated),
+    - results: Results
+Instructor(extends User) Schema:
+    - id: String
+    - code: String
+    - user: User
+    - status: enum(active, pending,suspended,recated)
+      
+(ii): branch base models
+
+course Schema:
+    code: String
+    name: String
+    school: school
+    units: array
+    id: String
+school Schema:
+    code: String
+    name: String
+    faculty: Faculty
+    course: Course
+    id: String
+Faculty Schema:
+    id : String
+    name: String
+    code: String
+    schools: Array
+unit Schema:
+    id : String
+    name: String
+    code: String
+    course: Course
+    tutor: Instructor
+
+(iii): Other models
+
+Activiy Schema:
+    id : String
+    topic: String
+    description: String
+    target: Array
+Assignment Schema:
+    id : String
+    unit: unit
+    deadline: Date
+    Topic: String
+    attachments: Array(file upload urls)
+    submissions: Array(AssignmentSubmitted)
+AssignmentSubmitted Schema:
+    id : String
+    sender: user
+    assignment: assignment,
+    status: enum(pending, checked, rejected)
