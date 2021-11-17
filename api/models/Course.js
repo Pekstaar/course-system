@@ -12,7 +12,7 @@ const CourseSchema = new Schema({
     required: true,
     uniquie: true,
   },
-  School: {
+  school: {
     type: Schema.Types.ObjectId,
     ref: "School",
   },

@@ -8,7 +8,7 @@ const UnitSchema = new Schema({
     unique: true,
   },
   code: {
-    type: string,
+    type: String,
     required: true,
     unique: true,
   },
