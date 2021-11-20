@@ -6,9 +6,9 @@ const User = require("../models/User");
 router.get("/", async (req, res) => {
   // fetching users from database:
   try {
-    const { password, ...others } = await Student.find().populate("user");
+    const students = await Student.find().populate("course").populate("user");
 
-    res.status(200).json(others);
+    res.status(200).send(students);
   } catch (err) {
     res.status(500).send("Students fetch Error: " + err.message);
   }
@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
 // update Student
 router.put("/:id", async (req, res) => {
-  if (req.params.id === req.body.id) {
+  if (req.params.id === req.body.id || req.body.sender === "admin") {
     try {
       const { user, ...others } = req.body;
 

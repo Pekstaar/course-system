@@ -7,7 +7,7 @@ router.post("/", async (req, res) => {
   try {
     // initialize new School
     //   get faculty by code sent
-    const faculty = await Faculty.findOne({ faculty: req.params.code });
+    const faculty = await Faculty.findById(req.body.faculty);
 
     const newSchool = new School({
       code: req.body.code,
@@ -18,7 +18,11 @@ router.post("/", async (req, res) => {
     //   save School:
     const savedSchool = await newSchool.save();
 
-    //   success response:
+    // add school to faculty
+    faculty.schools.push(savedSchool._id);
+    faculty.save();
+
+    // //   success response:
     res.status(200).json(savedSchool);
   } catch (err) {
     // school create error response:
@@ -61,7 +65,7 @@ router.delete("/:id", async (req, res) => {
 // get all schools
 router.get("/all", async (req, res) => {
   try {
-    const schools = await School.find();
+    const schools = await School.find().populate("faculty").populate("courses");
 
     // send fetched schools
     res.status(200).json(schools);

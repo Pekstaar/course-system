@@ -1,9 +1,13 @@
 const router = require("express").Router();
 const Unit = require("../models/Unit");
+const Course = require("../models/Course");
 
 // create Unit
 router.post("/", async (req, res) => {
   try {
+    // fetch course selected
+    const course = await Course.findById(req.body.course);
+
     const newUnit = new Unit({
       code: req.body.code,
       name: req.body.name,
@@ -13,6 +17,8 @@ router.post("/", async (req, res) => {
 
     //   save the created unit
     const unit = await newUnit.save();
+    course.units.push(unit._id);
+    course.save();
 
     res.status(200).json(unit);
   } catch (err) {
