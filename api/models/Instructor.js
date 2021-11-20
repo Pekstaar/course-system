@@ -17,6 +17,12 @@ const InstructorSchema = new mongoose.Schema({
     default: "pending",
     required: true,
   },
+  units: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Unit",
+    },
+  ],
 });
 
 module.exports = mongoose.model("Instructor", InstructorSchema);

@@ -55,7 +55,7 @@ router.delete("/:id", async (req, res) => {
 
 // get all faculties
 router.get("/all", async (req, res) => {
-  const faculties = await Faculty.find();
+  const faculties = await Faculty.find().populate("schools");
 
   // send fetched faculties
   res.status(200).json(faculties);

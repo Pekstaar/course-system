@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Course = require("../models/Course");
+const School = require("../models/School");
 
 // create course
 router.post("/", async (req, res) => {
@@ -10,8 +11,12 @@ router.post("/", async (req, res) => {
       school: req.body.school,
     });
 
+    const s = await School.findById(req.body.school);
+
     //   save the created Course
     const course = await newCourse.save();
+    s.courses.push(course._id);
+    s.save();
 
     res.status(200).json(course);
   } catch (err) {
@@ -54,7 +59,7 @@ router.delete("/:id", async (req, res) => {
 // get all courses
 router.get("/all", async (req, res) => {
   try {
-    const courses = await Course.find();
+    const courses = await Course.find().populate("school");
 
     // send fetched schools
     res.status(200).json(courses);

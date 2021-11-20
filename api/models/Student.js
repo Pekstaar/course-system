@@ -17,6 +17,14 @@ const StudentSchema = new mongoose.Schema({
     default: "pending",
     required: true,
   },
+  dob: {
+    type: Date,
+  },
+  course: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Course",
+    // required: true,
+  },
 });
 
 module.exports = mongoose.model("Student", StudentSchema);

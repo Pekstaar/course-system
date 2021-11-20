@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BsPersonCircle } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import { Context } from "../../context/Context";
+import { toastSuccess } from "../toaster";
 
 const Navbar = () => {
+  const { initState, setInitState } = useContext(Context);
+
+  // check if one is authenticated
+
   return (
     <div>
       {/* <!-- ======= Header ======= --> */}
@@ -10,13 +17,13 @@ const Navbar = () => {
         className="header fixed-top d-flex align-items-center"
       >
         <div className="d-flex align-items-center justify-content-between">
-          <a href="index.html" className="logo d-flex align-items-center">
+          <Link to="/" className="logo d-flex align-items-center">
             <img
               src="https://sashabarab.org/wp-content/uploads/2015/02/course-icon.png"
               alt=""
             />
-            <span className="d-none d-lg-block">Course System</span>
-          </a>
+            <h2 className="uppercase text-xl card-title">Course System</h2>
+          </Link>
           <i className="bi bi-list toggle-sidebar-btn"></i>
         </div>
         {/* <!-- End Logo --> */}
@@ -142,14 +149,15 @@ const Navbar = () => {
               >
                 <BsPersonCircle classNameName="text-3xl text-gray-300" />
                 <span className="d-none d-md-block dropdown-toggle ps-2 text-left text-indigo-500">
-                  Millicent
+                  {/* {initState.auth.user.username} */}
+                  {initState.auth && initState.auth.user.username}
                 </span>
               </a>
               {/* <!-- End Profile Iamge Icon --> */}
 
               <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                 <li className="dropdown-header">
-                  <h6>Millicent Anderson</h6>
+                  <h6>{initState.auth && initState.auth.user.username}</h6>
                   <span>Administrator</span>
                 </li>
 
@@ -167,7 +175,14 @@ const Navbar = () => {
 
                 <Underliner />
 
-                <Selector text={"Sign Out"} icon="bi bi-box-arrow-right" />
+                <Selector
+                  text={"Sign Out"}
+                  icon="bi bi-box-arrow-right"
+                  clickFunction={() => {
+                    setInitState({ auth: null });
+                    toastSuccess("You Logged out successfully!");
+                  }}
+                />
               </ul>
               {/* <!-- End Profile Dropdown Items --> */}
             </li>
@@ -184,18 +199,20 @@ const Navbar = () => {
 
 export default Navbar;
 
-export const Selector = ({ icon, text }) => {
+export const Selector = ({ icon, text, clickFunction }) => {
   return (
-    <li>
-      <a
-        className="dropdown-item d-flex align-items-center"
-        href="users-profile.html"
-      >
+    <Link
+      to="/                                                                                                                                                                                                                                                                                                                                                                                                                "
+      onClick={() => {
+        clickFunction();
+      }}
+    >
+      <span className="dropdown-item d-flex align-items-center">
         {/* <i className="bi bi-gear"></i> */}
         <i className={icon}></i>
         <span>{text}</span>
-      </a>
-    </li>
+      </span>
+    </Link>
   );
 };
 

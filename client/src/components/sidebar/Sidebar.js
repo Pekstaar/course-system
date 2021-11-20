@@ -12,9 +12,9 @@ const Sidebar = () => {
       <aside id="sidebar" class="sidebar bg-indigo-100">
         <ul class="sidebar-nav" id="sidebar-nav">
           <li class="nav-item">
-            <Link as="a" class="nav-link " to="/">
+            <Link as="a" class="nav-link " to="/dashboard">
               <i class="bi bi-grid"></i>
-              <span className="text-base tracking-wide uppercase font-medium">
+              <span className="text-base tracking-wide font-medium">
                 Dashboard
               </span>
             </Link>
@@ -28,7 +28,7 @@ const Sidebar = () => {
           >
             {/* register link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/students/register" as="a">
+              <Link to="/admin/students/register" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Register</span>
               </Link>
@@ -36,7 +36,7 @@ const Sidebar = () => {
 
             {/* management link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/students" as="a">
+              <Link to="/admin/students" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Manage</span>
               </Link>
@@ -52,7 +52,7 @@ const Sidebar = () => {
           >
             {/* management link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/instructors" as="a">
+              <Link to="/admin/instructors" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Manage</span>
               </Link>
@@ -60,7 +60,7 @@ const Sidebar = () => {
 
             {/* register link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/instructors/register" as="a">
+              <Link to="/admin/instructors/register" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Register</span>
               </Link>
@@ -76,7 +76,7 @@ const Sidebar = () => {
           >
             {/* Create link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/faculties/create" as="a">
+              <Link to="/admin/faculties/create" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Create</span>
               </Link>
@@ -84,7 +84,7 @@ const Sidebar = () => {
 
             {/* management link */}
             <li className="hover:bg-indigo-50">
-              <Link to="/faculties" as="a">
+              <Link to="/admin/faculties" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Manage</span>
               </Link>
@@ -102,7 +102,7 @@ const Sidebar = () => {
           >
             {/* Create school */}
             <li className="hover:bg-indigo-50">
-              <Link to="/schools/create" as="a">
+              <Link to="/admin/schools/create" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Create</span>
               </Link>
@@ -110,7 +110,7 @@ const Sidebar = () => {
 
             {/* Manage schools */}
             <li className="hover:bg-indigo-50">
-              <Link to="/schools" as="a">
+              <Link to="/admin/schools" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Manage</span>
               </Link>
@@ -119,14 +119,13 @@ const Sidebar = () => {
           {/* end of Schools */}
 
           {/* /Courses */}
-
           <ListItem
             icon={<SiCoursera className="text-indigo-300 text-base" />}
             name={"Courses"}
             id="courses"
           >
             <li className="hover:bg-indigo-50">
-              <Link to="/courses/create" as="a">
+              <Link to="/admin/courses/create" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Create</span>
               </Link>
@@ -134,13 +133,36 @@ const Sidebar = () => {
 
             {/* Manage schools */}
             <li className="hover:bg-indigo-50">
-              <Link to="/courses" as="a">
+              <Link to="/admin/courses" as="a">
                 <i class="bi bi-circle"></i>
                 <span>Manage</span>
               </Link>
             </li>
           </ListItem>
           {/* <!-- End courses Nav --> */}
+
+          {/* /Units */}
+          <ListItem
+            icon={<span classname="text-blue-300">U</span>}
+            name={"Units"}
+            id="units"
+          >
+            <li className="hover:bg-indigo-50">
+              <Link to="/admin/units/create" as="a">
+                <i class="bi bi-circle"></i>
+                <span>Create</span>
+              </Link>
+            </li>
+
+            {/* Manage Units */}
+            <li className="hover:bg-indigo-50">
+              <Link to="/admin/units" as="a">
+                <i class="bi bi-circle"></i>
+                <span>Manage</span>
+              </Link>
+            </li>
+          </ListItem>
+          {/* <!-- End Units Nav --> */}
         </ul>
       </aside>
       {/* <!-- End Sidebar--> */}

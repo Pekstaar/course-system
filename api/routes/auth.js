@@ -15,17 +15,21 @@ router.post("/register/student", async (req, res) => {
     const encPassword = await bcrypt.hash(req.body.password, salt);
 
     const newUser = new User({
-      username: req.body.name,
+      username: req.body.username,
       email: req.body.email,
+      phone: req.body.phone,
+      location: req.body.location,
       password: encPassword,
       role: req.body.role,
     });
 
     const user = await newUser.save();
     const newStudent = new Student({
-      ucode: req.body.ucode,
+      code: req.body.code,
       user,
       status: req.body.status,
+      dob: req.body.dob,
+      course: req.body.course,
     });
 
     // save new user:
@@ -45,12 +49,13 @@ router.post("/login/student", async (req, res) => {
       "user"
     );
 
-    !student && res.json("Wrong Credentials!");
+    !student && res.status(401).json("Wrong Credentials!");
 
     const valid = await bcrypt.compare(
       req.body.password,
       student.user.password
     );
+    !valid && res.status(401).json("Wrong Credentials!");
 
     valid && res.status(200).json(student);
   } catch (err) {
@@ -102,10 +107,10 @@ router.post("/login/admin", async (req, res) => {
     // get current admin from database
     const admin = await Admin.findOne({ code: req.body.code }).populate("user");
 
-    !admin && res.json("Wrong Credentials!");
+    !admin && res.status(401).send("Wrong Credentials!");
 
     const valid = await bcrypt.compare(req.body.password, admin.user.password);
-    !valid && res.json("Wrong Credentials!");
+    !valid && res.status(401).send("Wrong Credentials!");
 
     valid && res.status(200).json(admin);
   } catch (err) {
@@ -125,8 +130,10 @@ router.post("/register/instructor", async (req, res) => {
 
     // load User model fields
     const newUser = new User({
-      username: req.body.name,
+      username: req.body.username,
       email: req.body.email,
+      phone: req.body.phone,
+      location: req.body.location,
       password: encPassword,
       role: req.body.role,
     });
@@ -139,6 +146,7 @@ router.post("/register/instructor", async (req, res) => {
       code: req.body.code,
       user,
       status: req.body.status,
+      units: req.body.units,
     });
 
     // save new instructor:
@@ -159,13 +167,13 @@ router.post("/login/instructor", async (req, res) => {
       code: req.body.code,
     }).populate("user");
 
-    !instructor && res.json("Wrong Credentials!");
+    !instructor && res.status(401).json("Wrong Credentials!");
 
     const valid = await bcrypt.compare(
       req.body.password,
       instructor.user.password
     );
-    !valid && res.json("Wrong Credentials!");
+    !valid && res.status(401).json("Wrong Credentials!");
 
     valid && res.status(200).json(instructor);
   } catch (err) {
