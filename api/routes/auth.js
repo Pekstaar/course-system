@@ -146,6 +146,7 @@ router.post("/register/instructor", async (req, res) => {
       code: req.body.code,
       user,
       status: req.body.status,
+      subject: req.body.subject,
       units: req.body.units,
     });
 
@@ -153,6 +154,33 @@ router.post("/register/instructor", async (req, res) => {
     const instructor = await newInstructor.save();
 
     res.status(200).json(instructor);
+  } catch (err) {
+    res.status(500).json(err.message);
+    console.log(err);
+  }
+});
+
+// password update
+router.post("/pwd/instructor", async (req, res) => {
+  //   const { uid, name, email, password, role, status } = req.body;
+  // encrypt password
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    const encPassword = await bcrypt.hash(req.body.password, salt);
+
+    // save user to user model
+    // const user = await User.findById(req.body.id);
+    const user = await User.findByIdAndUpdate(
+      req.body.id,
+      {
+        password: encPassword,
+      },
+      { new: true }
+    );
+
+    // load Instructor fields
+    res.status(200).json(user);
   } catch (err) {
     res.status(500).json(err.message);
     console.log(err);
@@ -178,6 +206,20 @@ router.post("/login/instructor", async (req, res) => {
     valid && res.status(200).json(instructor);
   } catch (err) {
     res.status(500).json(err.message);
+  }
+});
+
+// path to validate passwords
+router.post("/validate", async (req, res) => {
+  if (req.body.id && req.body.id !== "") {
+    const isValid = await bcrypt.compare(
+      req.body.password,
+      req.body.encryptedPassword
+    );
+
+    res.status(200).json(isValid);
+  } else {
+    res.status(401).send("Unauthorized");
   }
 });
 module.exports = router;

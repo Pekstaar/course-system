@@ -11,6 +11,10 @@ const InstructorSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  subject: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ["active", "pending", "suspended", "discontinued"],

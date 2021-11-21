@@ -6,9 +6,25 @@ const User = require("../models/User");
 router.get("/", async (req, res) => {
   // fetching instructors from database:
   try {
-    const { password, ...others } = await Instructor.find().populate("user");
+    const instructors = await Instructor.find()
+      .populate("user")
+      .populate("units");
 
-    res.status(200).json(others);
+    res.status(200).json(instructors);
+  } catch (err) {
+    res.status(500).send("Admin fetch Error: " + err.message);
+  }
+});
+
+//get single instructors
+router.get("/:id", async (req, res) => {
+  // fetching instructors from database:
+  try {
+    const instructors = await Instructor.findById(req.params.id)
+      .populate("user")
+      .populate("units");
+
+    res.status(200).json(instructors);
   } catch (err) {
     res.status(500).send("Admin fetch Error: " + err.message);
   }
@@ -16,7 +32,7 @@ router.get("/", async (req, res) => {
 
 // update instructor
 router.put("/:id", async (req, res) => {
-  if (req.params.id === req.body.id) {
+  if (req.params.id === req.body._id || req.body.sender === "admin") {
     try {
       const { user, ...others } = req.body;
 
@@ -28,7 +44,7 @@ router.put("/:id", async (req, res) => {
 
       try {
         //   update user model
-        await User.findByIdAndUpdate(instructor.user, user, {
+        await User.findByIdAndUpdate(instructor.user._id, user, {
           new: true,
         });
 
@@ -39,6 +55,8 @@ router.put("/:id", async (req, res) => {
       } catch (err) {
         res.status(500).json(err.message);
       }
+
+      // await User.findByIdAndUpdate(instructor)
 
       const result = await Instructor.findById(req.params.id).populate("user");
 

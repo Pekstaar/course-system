@@ -16,9 +16,12 @@ const CourseSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "School",
   },
-  units: {
-    type: Array,
-  },
+  units: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Unit",
+    },
+  ],
 });
 
 module.exports = model("Course", CourseSchema);

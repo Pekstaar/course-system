@@ -35,17 +35,16 @@ const LandingPage = () => {
             <hr className="my-3" />
           </div>
 
-          <Link
-            as="div"
-            to="/dashboard"
+          <a
+            href="http://localhost:3000/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             ADMIN
-          </Link>
+          </a>
 
           <Link
             as="div"
-            to="/"
+            to="/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             INSTRUCTOR

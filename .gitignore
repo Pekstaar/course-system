@@ -22,7 +22,12 @@ yarn-error.log*
 
 /node_tut
 /frontend
-/client/node_modules
-/client/public/assets/vendor
-/client/public/assets/img
+/admin/node_modules
+/admin/public/assets/vendor
+/admin/public/assets/img
+
 /api/node_modules
+
+/instructor/node_modules
+/instructor/public/assets/vendor
+/instructor/public/assets/img

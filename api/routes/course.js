@@ -59,7 +59,7 @@ router.delete("/:id", async (req, res) => {
 // get all courses
 router.get("/all", async (req, res) => {
   try {
-    const courses = await Course.find().populate("school");
+    const courses = await Course.find().populate("school").populate("units");
 
     // send fetched schools
     res.status(200).json(courses);
@@ -72,7 +72,9 @@ router.get("/all", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     if (req.query) {
-      const course = await Course.findOne({ code: req.query.code });
+      const course = await Course.findOne({ code: req.query.code })
+        .populate("school")
+        .populate("units");
 
       // success due to fetch
       res.status(200).json(course);
@@ -85,7 +87,9 @@ router.get("/", async (req, res) => {
 // getSingle Course via id parameter
 router.get("/:id", async (req, res) => {
   try {
-    const singleCourse = await Course.findById(req.params.id);
+    const singleCourse = await Course.findById(req.params.id)
+      .populate("units")
+      .populate("school");
 
     //   fetch success response
     res.status(200).json(singleCourse);

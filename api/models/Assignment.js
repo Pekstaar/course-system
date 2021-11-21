@@ -10,6 +10,13 @@ const AssignmentSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "unit",
   },
+  description: {
+    type: String,
+  },
+  instructor: {
+    type: Schema.Types.ObjectId,
+    ref: "instructor",
+  },
   deadline: {
     type: Date,
     required,
