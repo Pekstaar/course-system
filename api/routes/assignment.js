@@ -12,10 +12,11 @@ router.post("/", async (req, res) => {
       instructor: req.body.instructor,
       deadline: req.body.deadline,
       attachments: req.body.attachments,
+      type: req.body.type,
     });
 
     //   save the created unit
-    const assignment = await newUnit.save();
+    const assignment = await newAssignment.save();
 
     res.status(200).json(assignment);
   } catch (err) {
@@ -58,10 +59,10 @@ router.delete("/:id", async (req, res) => {
 });
 
 // get all assignments
-router.get("/all", async (req, res) => {
+router.get("/all/:id", async (req, res) => {
   try {
-    const assignmetns = await Assignment.find()
-      .populate("course")
+    const assignments = await Assignment.find({ instructor: req.params.id })
+      .populate("unit")
       .populate("instructor")
       .exec();
 

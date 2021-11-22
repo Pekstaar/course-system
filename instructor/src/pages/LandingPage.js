@@ -22,7 +22,7 @@ const LandingPage = () => {
             COURSE MANAGEMENT SYSTEM
           </h2>
           <span className="font-bold text-2xl my-10 text-gray-200">
-            Institute of academic excellence and cultural diversity.
+            <i>Institute of academic excellence and cultural diversity.</i>
           </span>
         </div>
 

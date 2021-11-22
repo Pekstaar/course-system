@@ -203,7 +203,7 @@ const CreateUnit = () => {
                   type="submit"
                   class="btn btn-primary col-md-6 p-2.5 uppercase"
                 >
-                  create School
+                  create Unit
                 </button>
               </div>
             </form>

@@ -13,6 +13,7 @@ const facultyRoute = require("./routes/faculty");
 const courseRoute = require("./routes/course");
 const schoolRoute = require("./routes/school");
 const unitRoute = require("./routes/unit");
+const assignmentRoute = require("./routes/assignment");
 
 // configure .env
 dotenv.config();
@@ -48,5 +49,8 @@ app.use("/api/faculty", facultyRoute);
 app.use("/api/course", courseRoute);
 app.use("/api/school", schoolRoute);
 app.use("/api/unit", unitRoute);
+
+// other
+app.use("/api/assignment", assignmentRoute);
 
 app.listen(8081);

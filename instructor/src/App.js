@@ -7,6 +7,7 @@ import CreateAssignment from "./pages/CreateAssignment";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
+import ManageAssignment from "./pages/ManageAssignment";
 import ManageProfile from "./pages/ManageProfile";
 import Signup from "./pages/Signup";
 
@@ -26,7 +27,7 @@ const App = () => {
         <Route path="/profile" exact element={<ManageProfile />} />
 
         {/* Assignment path */}
-        <Route path="assignment" exact element={<ManageProfile />} />
+        <Route path="assignment" exact element={<ManageAssignment />} />
         <Route path="assignment/create" exact element={<CreateAssignment />} />
 
         {/* account path */}

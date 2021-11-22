@@ -21,8 +21,9 @@ router.get("/:id", async (req, res) => {
   // fetching instructors from database:
   try {
     const instructors = await Instructor.findById(req.params.id)
+      .populate("units")
       .populate("user")
-      .populate("units");
+      .exec();
 
     res.status(200).json(instructors);
   } catch (err) {

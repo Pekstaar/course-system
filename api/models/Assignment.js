@@ -2,24 +2,28 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const AssignmentSchema = new Schema({
+  type: {
+    type: String,
+    required: true,
+  },
   topic: {
     type: String,
     required: true,
   },
   unit: {
     type: Schema.Types.ObjectId,
-    ref: "unit",
+    ref: "Unit",
   },
   description: {
     type: String,
   },
   instructor: {
     type: Schema.Types.ObjectId,
-    ref: "instructor",
+    ref: "Instructor",
   },
   deadline: {
     type: Date,
-    required,
+    required: true,
   },
   submissions: [
     {
@@ -34,4 +38,4 @@ const AssignmentSchema = new Schema({
   ],
 });
 
-module.exports = model("School", AssignmentSchema);
+module.exports = model("Assignment", AssignmentSchema);
