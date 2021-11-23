@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
 // update Student
 router.put("/:id", async (req, res) => {
-  if (req.params.id === req.body.id || req.body.sender === "admin") {
+  if (req.params.id === req.body._id || req.body.sender === "admin") {
     try {
       const { user, ...others } = req.body;
 
@@ -51,6 +51,28 @@ router.delete("/", async (req, res) => {
   const deletedStudent = await Student.deleteOne({});
 
   res.send({ deletedUser, deletedStudent });
+});
+
+// getStudents based on course
+router.get("/", async (req, res) => {
+  try {
+    if (req.query.course) {
+      const students = await Student.find({ course: req.query.course })
+        .populate("course")
+        .populate("user")
+        .exec();
+
+      // const assignments = await Assignment.find({ course: req.query.course })
+      //   .populate("unit")
+      //   .populate("instructor")
+      //   .exec();
+      res.status(200).json(students);
+    }
+
+    // // send fetched units
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
 });
 
 module.exports = router;

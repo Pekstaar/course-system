@@ -1,23 +1,29 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
-const SubmitSchema = new Schema({
-  code: {
-    type: String,
-    required: true,
-    unique: true,
+const SubmitSchema = new Schema(
+  {
+    sender: {
+      type: Schema.Types.ObjectId,
+      ref: "Student",
+    },
+    grade: {
+      type: Number,
+      default: 0,
+    },
+    verified: {
+      type: Boolean,
+      default: false,
+    },
+    assignment: {
+      type: Schema.Types.ObjectId,
+      ref: "Assignment",
+    },
+    attachment: {
+      type: String,
+    },
   },
-  name: {
-    type: String,
-    required: true,
-  },
-  Faculty: {
-    type: Schema.Types.ObjectId,
-    ref: "Faculty",
-  },
-  courses: {
-    type: Array,
-  },
-});
+  { time: true }
+);
 
 module.exports = model("AssignmentSubmits", SubmitSchema);

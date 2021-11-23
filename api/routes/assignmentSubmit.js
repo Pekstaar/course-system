@@ -1,25 +1,21 @@
 const router = require("express").Router();
-const Assignment = require("../models/Assignment");
+const AssignmentSubmit = require("../models/AssignmentSubmits");
 const Instructor = require("../models/Instructor");
 const Course = require("../models/Course");
 
-// create Assignment
+// create Assignmentsubmit
 router.post("/", async (req, res) => {
   try {
-    const newAssignment = new Assignment({
-      topic: req.body.topic,
-      description: req.body.description,
-      unit: req.body.unit,
-      instructor: req.body.instructor,
-      deadline: req.body.deadline,
-      attachments: req.body.attachments,
-      type: req.body.type,
+    const newSubmit = new AssignmentSubmit({
+      sender: req.body.sender,
+      grade: req.body.grade,
+      assignment: req.body.assignment,
+      attachment: req.body.attachment,
     });
-
     //   save the created unit
-    const assignment = await newAssignment.save();
+    const submit = await newSubmit.save();
 
-    res.status(200).json(assignment);
+    res.status(200).json(submit);
   } catch (err) {
     res.status(500).send(err.message);
   }

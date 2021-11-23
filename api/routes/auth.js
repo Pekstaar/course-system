@@ -45,9 +45,10 @@ router.post("/register/student", async (req, res) => {
 // login User
 router.post("/login/student", async (req, res) => {
   try {
-    const student = await Student.findOne({ ucode: req.body.ucode }).populate(
-      "user"
-    );
+    const student = await Student.findOne({ code: req.body.code })
+      .populate("user")
+      .populate("course")
+      .exec();
 
     !student && res.status(401).json("Wrong Credentials!");
 
@@ -161,7 +162,7 @@ router.post("/register/instructor", async (req, res) => {
 });
 
 // password update
-router.post("/pwd/instructor", async (req, res) => {
+router.post("/pwd/update", async (req, res) => {
   //   const { uid, name, email, password, role, status } = req.body;
   // encrypt password
 
