@@ -31,3 +31,7 @@ yarn-error.log*
 /instructor/node_modules
 /instructor/public/assets/vendor
 /instructor/public/assets/img
+
+/student/node_modules
+/student/public/assets/vendor
+/student/public/assets/img
