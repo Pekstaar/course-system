@@ -53,7 +53,7 @@ router.delete("/", async (req, res) => {
   res.send({ deletedUser, deletedStudent });
 });
 
-// getStudents based on course
+// getStudents based on query
 router.get("/", async (req, res) => {
   try {
     if (req.query.course) {

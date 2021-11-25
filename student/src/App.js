@@ -9,6 +9,7 @@ import LandingPage from "./pages/LandingPage";
 import Login from "./pages/Login";
 import ManageProfile from "./pages/ManageProfile";
 import Signup from "./pages/Signup";
+import Submits from "./pages/Submits";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ function App() {
         <Route path="/profile" element={<ManageProfile />} />
         <Route path="/account" element={<Account />} />
         <Route path="/assignments" element={<Assignments />} />
+        <Route path="/submits" element={<Submits />} />
         <Route path="/assignment/:id" element={<AssignmentDetails />} />
       </Routes>
     </BrowserRouter>

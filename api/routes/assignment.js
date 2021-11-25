@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const Assignment = require("../models/Assignment");
-const Instructor = require("../models/Instructor");
 const Course = require("../models/Course");
 
 // create Assignment

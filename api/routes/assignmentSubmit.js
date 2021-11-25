@@ -25,13 +25,16 @@ router.post("/", async (req, res) => {
 router.put("/", async (req, res) => {
   try {
     //   find assignment and update
-    const assignmentToUpdate = await Assignment.findByIdAndUpdate(
+    const assignmentToUpdate = await AssignmentSubmit.findByIdAndUpdate(
       req.body.id,
       req.body,
       {
         new: true,
       }
-    );
+    )
+      .populate("assignment")
+      .populate("sender")
+      .exec();
 
     // update success response:
     res.status(200).json(assignmentToUpdate);
@@ -56,11 +59,27 @@ router.delete("/:id", async (req, res) => {
 });
 
 // get all assignments
-router.get("/all/:id", async (req, res) => {
+router.get("/all", async (req, res) => {
   try {
-    const assignments = await Assignment.find({ instructor: req.params.id })
-      .populate("unit")
-      .populate("instructor")
+    const assignments = await AssignmentSubmit.find()
+      .populate("assignment")
+      .populate("sender")
+      .exec();
+
+    // send fetched units
+    res.status(200).json(assignments);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
+router.get("/:id", async (req, res) => {
+  try {
+    const assignments = await AssignmentSubmit.find({
+      sender: req.params.id,
+    })
+      .populate("assignment")
+      .populate("sender")
       .exec();
 
     // send fetched units
@@ -102,7 +121,9 @@ router.get("/", async (req, res) => {
 router.get("/", async (req, res) => {
   try {
     if (req.query) {
-      const assignment = await Assignment.findOne({ code: req.query.code });
+      const assignment = await AssignmentSubmit.findOne({
+        code: req.query.code,
+      });
 
       // success due to fetch
       res.status(200).json(assignment);
@@ -115,9 +136,10 @@ router.get("/", async (req, res) => {
 // getSingle Assignment via id parameter
 router.get("/:id", async (req, res) => {
   try {
-    const singleAssignment = await Assignment.findById(req.params.id)
-      .populate("unit")
-      .populate("instructor");
+    const singleAssignment = await AssignmentSubmit.findById(req.params.id)
+      .populate("assignment")
+      .populate("sender")
+      .exec();
 
     //   fetch success response
     res.status(200).json(singleAssignment);

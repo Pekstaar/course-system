@@ -10,6 +10,8 @@ import Login from "./pages/Login";
 import ManageAssignment from "./pages/ManageAssignment";
 import ManageProfile from "./pages/ManageProfile";
 import Signup from "./pages/Signup";
+import AssignmentSubmits from "./pages/AssignmentSubmits";
+import Submit from "./pages/Submit";
 
 const App = () => {
   return (
@@ -29,6 +31,13 @@ const App = () => {
         {/* Assignment path */}
         <Route path="assignment" exact element={<ManageAssignment />} />
         <Route path="assignment/create" exact element={<CreateAssignment />} />
+        <Route path="assignment/submits/:id" exact element={<Submit />} />
+
+        <Route
+          path="assignment/submits"
+          exact
+          element={<AssignmentSubmits />}
+        />
 
         {/* account path */}
         <Route path="/account" exact element={<Account />} />

@@ -1,6 +1,7 @@
-const router = require("express").Router();
+router = require("express").Router();
 const Unit = require("../models/Unit");
 const Course = require("../models/Course");
+const Student = require("../models/Student");
 
 // create Unit
 router.post("/", async (req, res) => {
@@ -71,6 +72,23 @@ router.get("/all", async (req, res) => {
   }
 });
 
+// get some units
+router.get("/some", async (req, res) => {
+  try {
+    const students = await Student.find({
+      unit: {
+        $in: req.body.units,
+      },
+    })
+      .populate("course")
+      .populate("user");
+
+    res.status(200).json(students);
+  } catch (err) {
+    res.status(500).json(err.message);
+  }
+});
+
 // getSingle unit via code query
 router.get("/", async (req, res) => {
   try {
@@ -95,6 +113,18 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     // error response
     res.status(500).json(err.message);
+  }
+});
+
+router.get("/", async (req, res) => {
+  if (req.query.units) {
+    const units = await Unit.find({
+      _id: {
+        $in: req.query.units,
+      },
+    });
+
+    console.log(units);
   }
 });
 

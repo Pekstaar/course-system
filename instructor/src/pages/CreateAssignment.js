@@ -67,18 +67,20 @@ const CreateAssignment = () => {
 
   // check if one is authenticated
   React.useEffect(() => {
-    for (const u of initState.auth.units) {
-      axios
-        .get(`http://localhost:8081/api/unit/${u}`)
-        .then((r) => {
-          // if (units.includes(r.data.id)) {
-          console.log("matching:");
-          if (units.filter((u) => u._id === r.data._id).length === 0) {
-            setUnits([...units, r.data]);
-          }
-          // }
-        })
-        .catch((err) => console.error(err.message));
+    if (initState.auth) {
+      for (const u of initState.auth.units) {
+        axios
+          .get(`http://localhost:8081/api/unit/${u}`)
+          .then((r) => {
+            // if (units.includes(r.data.id)) {
+            console.log("matching:");
+            if (units.filter((u) => u._id === r.data._id).length === 0) {
+              setUnits([...units, r.data]);
+            }
+            // }
+          })
+          .catch((err) => console.error(err.message));
+      }
     }
     !initState.auth && navigate("/login");
     // eslint-disable-next-line react-hooks/exhaustive-deps

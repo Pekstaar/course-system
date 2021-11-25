@@ -31,6 +31,13 @@ const Sidebar = () => {
                 <span>View</span>
               </Link>
             </li>
+
+            <li className="hover:bg-indigo-50">
+              <Link to="/submits" as="a">
+                <i className="bi bi-circle"></i>
+                <span>Submits</span>
+              </Link>
+            </li>
           </ListItem>
 
           {/* /Profile */}

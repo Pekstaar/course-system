@@ -42,7 +42,7 @@ const Sidebar = () => {
 
             {/* Manage submitted Assignments */}
             <li className="hover:bg-indigo-50">
-              <Link to="/submits" as="a">
+              <Link to="/assignment/submits" as="a">
                 <i className="bi bi-circle"></i>
                 <span>Submitted Assignments</span>
               </Link>

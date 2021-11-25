@@ -12,10 +12,10 @@ import axios from "axios";
 import BreadCrumb from "../components/navbar/BreadCrumb";
 import { useNavigate } from "react-router";
 import { Context } from "../context/Context";
-import PrivateRouter from "../PrivateRouter";
 
-const Assignments = () => {
+const AssignmentSubmits = () => {
   const { initState } = useContext(Context);
+
   const navigate = useNavigate();
   const [assignments, setAssignments] = useState([]);
 
@@ -30,24 +30,25 @@ const Assignments = () => {
 
   // check if one is authenticated
   React.useEffect(() => {
-    axios
-      .get(
-        `${process.env.REACT_APP_VAR_API}assignment?course=${
-          initState.auth && initState.auth.course._id
-        }`
-      )
-      .then((r) => setAssignments(r.data))
-      .catch((err) => console.log(err.message));
+    initState.auth &&
+      axios
+        .get(`${process.env.REACT_APP_VAR_API}submit/all`)
+        .then((r) => setAssignments(r.data))
+        .catch((err) => console.log(err.message));
   }, [initState.auth]);
   //   const [selectedSchool, setSelectedSchool] = useState({});
 
+  React.useEffect(() => {
+    !initState.auth && navigate("/login");
+  }, [initState.auth, navigate]);
+
   return (
-    <PrivateRouter>
+    <>
       <Navbar />
       <Sidebar />
       <div classNameName=" h-full py-2" style={{ marginLeft: "300px" }}>
         <div className="mt-16">
-          <BreadCrumb location="Student/View assignments" />
+          <BreadCrumb location="Student/assignments/submits" />
         </div>
         <div classNameName="w-full px-4 ">
           {/* fields: firstname, lastname, email, dob, phoneno,location address,school,course,level */}
@@ -55,23 +56,21 @@ const Assignments = () => {
           <div className="card">
             <div className="flex justify-between">
               <h5 className="card-title mx-4 uppercase text-xl">
-                View Your Assignments
+                View Submitted Assignments
               </h5>
               <h5 className="card-title mx-4 lowercase ">
-                {initState.auth && initState.auth.course.name}
+                {/* {initState.auth && initState.auth.course.name} */}
               </h5>
             </div>
             <div className="card-body">
               <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="caption table">
-                  <caption className="ml-20">Your Assignments</caption>
+                  <caption className="ml-20">Submitted Assignments</caption>
                   <TableHead>
                     <TableRow className="bg-indigo-100">
                       <TableCell align="center">Topic</TableCell>
-                      <TableCell align="center">Type</TableCell>
-                      <TableCell align="center" className="uppercase">
-                        Unit
-                      </TableCell>
+                      <TableCell align="center">sender</TableCell>
+
                       <TableCell align="center" className="uppercase">
                         Deadline
                       </TableCell>
@@ -83,17 +82,18 @@ const Assignments = () => {
                         // <Link to="/dashboard">
                         <TableRow
                           key={u._id}
-                          onClick={() => navigate(`/assignment/${u._id}`)}
+                          onClick={() =>
+                            navigate(`/assignment/submits/${u._id}`)
+                          }
                           className="hover:bg-indigo-200 cursor-pointer"
                         >
                           <TableCell align="center" component="th" scope="row">
-                            {u.topic}
+                            {u.assignment.topic}
                           </TableCell>
-                          <TableCell align="center">{u.type}</TableCell>
-                          <TableCell align="center">{u.unit.name}</TableCell>
-                          <TableCell align="center">{u.deadline}</TableCell>
-                          {/* <TableCell align="center">{u.isVerif}</TableCell> */}
-                          {/* <TableCell align="center">{u.deadline}</TableCell> */}
+                          <TableCell align="center">{u.sender.code}</TableCell>
+                          <TableCell align="center">
+                            {u.assignment.deadline}
+                          </TableCell>
                         </TableRow>
                         // </Link>
                       ))}
@@ -104,8 +104,8 @@ const Assignments = () => {
           </div>
         </div>
       </div>
-    </PrivateRouter>
+    </>
   );
 };
 
-export default Assignments;
+export default AssignmentSubmits;
