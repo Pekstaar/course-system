@@ -42,14 +42,14 @@ const LandingPage = () => {
           </a>
 
           <a
-            href="http://localhost:3000/dashboard"
+            href="http://localhost:3001/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             INSTRUCTOR
           </a>
 
           <a
-            href="http://localhost:3000/dashboard"
+            href="http://localhost:3002/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             STUDENT

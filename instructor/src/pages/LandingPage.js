@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
@@ -42,21 +41,19 @@ const LandingPage = () => {
             ADMIN
           </a>
 
-          <Link
-            as="div"
-            to="/dashboard"
+          <a
+            href="http://localhost:3001/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             INSTRUCTOR
-          </Link>
+          </a>
 
-          <Link
-            as="div"
-            to="/"
+          <a
+            href="http://localhost:3002/dashboard"
             className="bg-indigo-800 p-2.5 btn w-5/6 text-white"
           >
             STUDENT
-          </Link>
+          </a>
         </div>
         {/* second half */}
       </div>
