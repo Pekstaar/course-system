@@ -46,7 +46,7 @@ const ManageAssignment = () => {
   const deleteUnit = (id) => {
     if (
       window.confirm(
-        `Are you sure you want delete unit? ${
+        `Are you sure you want delete assignment? ${
           assignments.filter((x) => x._id === id)[0].code
         }`
       )

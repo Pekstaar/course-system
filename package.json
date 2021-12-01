@@ -1,0 +1,20 @@
+{
+  "name": "course-system",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cd api && nodemon start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pekstaar/course-system.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pekstaar/course-system/issues"
+  },
+  "homepage": "https://github.com/Pekstaar/course-system#readme"
+}

@@ -16,11 +16,6 @@ import axios from "axios";
 import { toastError, toastSuccess } from "../components/toaster";
 
 const CreateUnit = () => {
-  // const faculties = [
-  //   "Faculty of Engineering and the Built Environment",
-  //   "Faculty of Social Sciences and Technology (FSST)",
-  // ];
-
   const [courses, setCourses] = React.useState([]);
   const [id, setId] = React.useState("");
   const [name, setName] = React.useState("");
@@ -150,52 +145,6 @@ const CreateUnit = () => {
                       </MenuItem>
                     ))}
                 </Select>
-              </div>
-
-              {/* Istructor Level */}
-              <div class="col-md-12 h-20 ">
-                <InputLabel id="demo-multiple-chip-label">
-                  Select Instructor
-                </InputLabel>
-                {/* <Select
-                  labelId="demo-multiple-chip-label"
-                  id="demo-multiple-chip"
-                  value={personName}
-                  onChange={handleChange}
-                  input={
-                    <OutlinedInput
-                      id="select-multiple-chip"
-                      label="school under faculty"
-                      className="w-full"
-                      placeholder="select schools under this faculty"
-                    />
-                  }
-                  renderValue={(selected) => (
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={{
-                    PaperProps: {
-                      style: {
-                        maxHeight: 48 * 4.5 + 8,
-                        width: 250,
-                      },
-                    },
-                  }}
-                >
-                  {schools.map((name, id) => (
-                    <MenuItem
-                      key={id}
-                      value={name}
-                      //   style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select> */}
               </div>
 
               <div class="text-center">

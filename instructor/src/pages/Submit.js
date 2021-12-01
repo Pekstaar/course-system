@@ -34,7 +34,7 @@ const Submit = () => {
   React.useEffect(() => {
     const getAssignment = () => {
       axios
-        .get(`${process.env.REACT_APP_VAR_API}submit/${id}`)
+        .get(`${process.env.REACT_APP_VAR_API}submit/assignment/${id}`)
         .then((r) => {
           setAssignment(r.data);
           setGrade(r.data.grade);

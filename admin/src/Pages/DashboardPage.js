@@ -7,7 +7,6 @@ import { useNavigate } from "react-router";
 import Card from "../components/Dashboard/Card";
 import Chart from "../components/Dashboard/Chart";
 import NewStudents from "../components/Dashboard/NewStudents";
-import RecentActivity from "../components/Dashboard/RecentActivity";
 import BreadCrumb from "../components/navbar/BreadCrumb";
 import Navbar from "../components/navbar/Navbar";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -60,7 +59,7 @@ const DashboardBody = () => {
           {/* <cards-end /> */}
           {/* <recentstudents-start> */}
           <div className="md:flex content-between w-full">
-            <div className="recentStudents self-start ml-4 w-4/6 mr-6">
+            <div className="recentStudents self-start ml-4 w-10/12 mx-auto mr-6">
               <NewStudents />
 
               {/* <chart-start > */}
@@ -71,12 +70,12 @@ const DashboardBody = () => {
               {/* </chart-end > */}
             </div>
 
-            <div className="bg-white w-2/6 ml-6 flex flex-col items-center rounded-xl  ">
+            {/* <div className="bg-white w-2/6 ml-6 flex flex-col items-center rounded-xl  ">
               <h5 class="card-title" style={{ textDecoration: "underline" }}>
                 Recent Activities
               </h5>
               <RecentActivity />
-            </div>
+            </div> */}
           </div>
           {/* </recentstudents-end> */}
           {/* <footer-start> */}

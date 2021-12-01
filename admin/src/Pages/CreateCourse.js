@@ -31,20 +31,6 @@ const CreateCourse = () => {
   const { initState } = useContext(Context);
   const navigate = useNavigate();
 
-  const [personName, setPersonName] = React.useState([]);
-  const handleChange = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setPersonName(
-      // On autofill we get a the stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
-  };
-
-  // load
-
-  // submit
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -82,7 +68,7 @@ const CreateCourse = () => {
         <div class="card mx-3">
           <h5 class="card-title underline mx-4">Create Course</h5>
 
-          {/* create faculty form: */}
+          {/* create course form: */}
           <div class="card-body">
             {/* <!-- Vertical Form --> */}
             <form class="row g-3" onSubmit={handleSubmit}>
@@ -159,58 +145,12 @@ const CreateCourse = () => {
                 </Select>
               </div>
 
-              {/* Course Level */}
-              <div class="col-md-12 h-20 ">
-                <InputLabel id="demo-multiple-chip-label">
-                  Select Level
-                </InputLabel>
-                <Select
-                  labelId="demo-multiple-chip-label"
-                  id="demo-multiple-chip"
-                  value={personName}
-                  onChange={handleChange}
-                  input={
-                    <OutlinedInput
-                      id="select-multiple-chip"
-                      label="school under faculty"
-                      className="w-full"
-                      placeholder="select schools under this faculty"
-                    />
-                  }
-                  renderValue={(selected) => (
-                    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
-                      {selected.map((value) => (
-                        <Chip key={value} label={value} />
-                      ))}
-                    </Box>
-                  )}
-                  MenuProps={{
-                    PaperProps: {
-                      style: {
-                        maxHeight: 48 * 4.5 + 8,
-                        width: 250,
-                      },
-                    },
-                  }}
-                >
-                  {schools.map((name, id) => (
-                    <MenuItem
-                      key={id}
-                      value={name}
-                      //   style={getStyles(name, personName, theme)}
-                    >
-                      {name}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </div>
-
               <div class="text-center">
                 <button
                   type="submit"
                   class="btn btn-primary col-md-6 p-2.5 uppercase"
                 >
-                  create School
+                  create Course
                 </button>
               </div>
             </form>

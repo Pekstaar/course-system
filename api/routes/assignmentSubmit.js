@@ -134,7 +134,7 @@ router.get("/", async (req, res) => {
 });
 
 // getSingle Assignment via id parameter
-router.get("/:id", async (req, res) => {
+router.get("/assignment/:id", async (req, res) => {
   try {
     const singleAssignment = await AssignmentSubmit.findById(req.params.id)
       .populate("assignment")
